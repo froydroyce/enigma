@@ -24,7 +24,7 @@ class OffsetTest < MiniTest::Test
     assert_equal Date.today.strftime("%d%m%y"), @offset.today
   end
 
-  def test_it_can_create_offset
+  def test_it_can_convert_date
 
     assert_equal [0, 5, 4, 4], @offset.convert_date
   end
