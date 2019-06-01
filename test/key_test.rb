@@ -32,9 +32,9 @@ class KeyTest < MiniTest::Test
     refute_equal "02175", key_2.numbers
   end
 
-  # def test_it_can_generate_key
-  #
-  #   assert_equal
-  # end
+  def test_it_can_generate_keys
+
+    assert_equal [02, 27, 71, 15], @key.generate_keys
+  end
 
 end
