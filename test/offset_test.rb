@@ -6,7 +6,6 @@ class OffsetTest < MiniTest::Test
   def setup
     @key = Key.new("02715")
     @offset = Offset.new(@key, "280388")
-    binding.pry
   end
 
   def test_it_exists
