@@ -17,5 +17,8 @@ class OffsetTest < MiniTest::Test
     assert_equal "280388", @offset.date
   end
 
+  def test_it_can_get_todays_date
 
+    assert_equal Date.today.strftime("%d%m%y"), @offset.today
+  end
 end
