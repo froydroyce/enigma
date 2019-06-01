@@ -25,4 +25,16 @@ class KeyTest < MiniTest::Test
     assert_equal 5, @key.random_numbers.length
     assert_equal 5, @key.random_numbers.length
   end
+
+  def test_it_has_default_of_random_numbers
+    key_2 = Key.new
+
+    refute_equal "02175", key_2.numbers
+  end
+
+  # def test_it_can_generate_key
+  #
+  #   assert_equal
+  # end
+
 end
