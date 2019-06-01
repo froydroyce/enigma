@@ -20,4 +20,9 @@ class ScramblerTest < MiniTest::Test
     assert_equal "hello world", @scrambler.msg
     assert_equal [2, 32, 75, 19], @scrambler.keys
   end
+
+  def test_it_can_scramble
+
+    assert_equal "jjfdqdqgtpy", @scrambler.scramble
+  end
 end
