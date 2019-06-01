@@ -6,6 +6,7 @@ class OffsetTest < MiniTest::Test
   def setup
     @key = Key.new("02715")
     @offset = Offset.new(@key, "280388")
+    binding.pry
   end
 
   def test_it_exists
@@ -31,7 +32,7 @@ class OffsetTest < MiniTest::Test
 
   def test_it_can_offset_keys
 
-    assert_equal [2, 32, 75, 15], @offset.offset_keys
+    assert_equal [2, 32, 75, 19], @offset.offset_keys
   end
 
 end
