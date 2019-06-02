@@ -14,6 +14,11 @@ class EnigmaTest < MiniTest::Test
     assert_instance_of Enigma, @enigma
   end
 
+  def test_it_can_make_offset
+
+    assert_equal [3, 27, 73, 20], @enigma.offset("02715", "040895")
+  end
+
   def test_it_can_encrypt
     expected = {
       encryption: "keder ohulw",
@@ -21,6 +26,6 @@ class EnigmaTest < MiniTest::Test
       date: "040895"
     }
 
-    assert_equal expected, @enigma.encrypt
+    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
   end
 end
