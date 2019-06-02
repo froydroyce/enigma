@@ -13,4 +13,14 @@ class EnigmaTest < MiniTest::Test
 
     assert_instance_of Enigma, @enigma
   end
+
+  def test_it_can_encrypt
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+
+    assert_equal expected, @enigma.encrypt
+  end
 end
