@@ -12,4 +12,12 @@ class Enigma
     enc[:date] = date
     enc
   end
+
+  def decrypt(message, key = Key.new.numbers, date = Offset.new.date)
+    dec = Hash.new
+    dec[:decryption] = Scrambler.new(message).descramble(offset(key, date))
+    dec[:key] = key
+    dec[:date] = date
+    dec
+  end
 end

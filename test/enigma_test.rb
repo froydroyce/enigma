@@ -27,5 +27,47 @@ class EnigmaTest < MiniTest::Test
     }
 
     assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+
+    expected = {
+      encryption: "mfhatasdwm ",
+      key: "02715",
+      date: "010619"
+    }
+
+    Offset.stub_any_instance(:date, "010619") do
+      assert_equal expected, @enigma.encrypt("hello world", "02715")
+    end
+
+    expected = {
+      encryption: "almxhgx kse",
+      key: "98765",
+      date: "010619"
+    }
+
+    Offset.stub_any_instance(:date, "010619") do
+      Key.stub_any_instance(:numbers, "98765") do
+        assert_equal expected, @enigma.encrypt("hello world")
+      end
+    end
+  end
+
+  def test_it_can_decrypt
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "010619"
+    }
+
+    Offset.stub_any_instance(:date, "010619") do
+      assert_equal expected, @enigma.decrypt("mfhatasdwm ", "02715")
+    end
   end
 end

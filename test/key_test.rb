@@ -4,6 +4,7 @@ require './lib/key'
 class KeyTest < MiniTest::Test
   def setup
     @key = Key.new("02715")
+    @key_2 = Key.new
   end
 
   def test_it_exists
@@ -16,25 +17,15 @@ class KeyTest < MiniTest::Test
     assert_equal "02715", @key.numbers
   end
 
-  def test_it_can_make_random_numbers
-
-    refute_equal @key.numbers, @key.random_numbers
-    assert_equal 5, @key.random_numbers.length
-    assert_equal 5, @key.random_numbers.length
-    assert_equal 5, @key.random_numbers.length
-    assert_equal 5, @key.random_numbers.length
-    assert_equal 5, @key.random_numbers.length
-  end
-
   def test_it_has_default_of_random_numbers
-    key_2 = Key.new
 
-    refute_equal "02175", key_2.numbers
+    Key.stub_any_instance(:numbers,"98765") do
+      assert_equal "98765", @key_2.numbers
+    end
   end
 
   def test_it_can_generate_keys
 
     assert_equal [02, 27, 71, 15], @key.generate_keyset
   end
-
 end
