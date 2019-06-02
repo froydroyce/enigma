@@ -31,4 +31,10 @@ class ScramblerTest < MiniTest::Test
 
     assert_equal "jjfdqeqgtqy", @scrambler.scramble
   end
+
+  def test_it_can_descramble
+    scrambler_1 = Scrambler.new("jjfdqeqgtqy", @offset.offset_keyset)
+
+    assert_equal "hello world", scrambler_1.descramble
+  end
 end

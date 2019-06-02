@@ -20,4 +20,10 @@ class Scrambler
       @char_set.rotate(@char_set.index(letter) + key).first
     end.join
   end
+
+  def descramble
+    zip_keys_with_letters.map do |letter, key|
+      @char_set.rotate(@char_set.index(letter) + (key * -1)).first
+    end.join
+  end
 end
