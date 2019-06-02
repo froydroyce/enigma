@@ -7,7 +7,8 @@ class ScramblerTest < MiniTest::Test
   def setup
     @key = Key.new("02715").generate_keyset
     @offset = Offset.new("280388").offset_keys(@key)
-    @scrambler = Scrambler.new("hello world")
+    @scrambler = Scrambler.new
+    @msg = "hello world"
   end
 
   def test_it_exists
@@ -17,23 +18,24 @@ class ScramblerTest < MiniTest::Test
 
   def test_it_has_attributes
 
-    assert_equal "hello world", @scrambler.msg
+    assert_equal "a", @scrambler.char_set.first
+    assert_equal " ", @scrambler.char_set.last
   end
 
   def test_it_can_zip_keys_with_letters
 
-    assert_equal ["h", 2], @scrambler.zip_keys_with_letters(@offset).first
-    assert_equal ["d", 75], @scrambler.zip_keys_with_letters(@offset).last
+    assert_equal ["h", 2], @scrambler.zip_keys_with_letters(@offset, @msg).first
+    assert_equal ["d", 75], @scrambler.zip_keys_with_letters(@offset, @msg).last
   end
 
   def test_it_can_scramble
 
-    assert_equal "jjfdqeqgtqy", @scrambler.scramble(@offset)
+    assert_equal "jjfdqeqgtqy", @scrambler.scramble(@offset, @msg)
   end
 
   def test_it_can_descramble
-    scrambler_1 = Scrambler.new("jjfdqeqgtqy")
 
-    assert_equal "hello world", scrambler_1.descramble(@offset)
+
+    assert_equal "hello world", @scrambler.descramble(@offset, "jjfdqeqgtqy")
   end
 end
