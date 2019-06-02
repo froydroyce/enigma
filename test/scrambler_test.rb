@@ -20,4 +20,15 @@ class ScramblerTest < MiniTest::Test
     assert_equal "hello world", @scrambler.msg
     assert_equal [2, 32, 75, 19], @scrambler.keys
   end
+
+  def test_it_can_zip_keys_with_letters
+
+    assert_equal ["h", 2], @scrambler.zip_keys_with_letters.first
+    assert_equal ["d", 75], @scrambler.zip_keys_with_letters.last
+  end
+
+  def test_it_can_scramble
+
+    assert_equal "jjfdqeqgtqy", @scrambler.scramble
+  end
 end
