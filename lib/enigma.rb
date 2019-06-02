@@ -5,17 +5,17 @@ class Enigma
     Offset.new(date).offset_keys(keyset)
   end
 
-  def encrypt(message, key = Key.new.numbers, date = Offset.new.date)
+  def encrypt(msg, key = Key.new.numbers, date = Offset.new.date)
     enc = Hash.new
-    enc[:encryption] = Scrambler.new(message).scramble(offset(key, date))
+    enc[:encryption] = Scrambler.new.scramble(offset(key, date), msg.downcase)
     enc[:key] = key
     enc[:date] = date
     enc
   end
 
-  def decrypt(message, key = Key.new.numbers, date = Offset.new.date)
+  def decrypt(msg, key = Key.new.numbers, date = Offset.new.date)
     dec = Hash.new
-    dec[:decryption] = Scrambler.new(message).descramble(offset(key, date))
+    dec[:decryption] = Scrambler.new.descramble(offset(key, date), msg.downcase)
     dec[:key] = key
     dec[:date] = date
     dec
