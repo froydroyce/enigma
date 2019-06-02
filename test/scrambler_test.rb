@@ -31,4 +31,9 @@ class ScramblerTest < MiniTest::Test
 
     assert_equal "jjfdqeqgtqy", @scrambler.scramble
   end
+
+  def test_it_can_descramble
+
+    assert_equal "hello world", @scrambler.descramble
+  end
 end
