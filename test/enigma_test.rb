@@ -31,12 +31,12 @@ class EnigmaTest < MiniTest::Test
 
   def test_it_can_decrypt
     expected = {
-      encryption: "hello world",
+      decryption: "hello world",
       key: "02715",
       date: "040895"
     }
 
-    assert_equal expected, @enigma.encrypt("keder ohulw", "02715", "040895")
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
 
