@@ -6,6 +6,7 @@ class OffsetTest < MiniTest::Test
   def setup
     @key = Key.new("02715")
     @offset = Offset.new("280388")
+    @offset_2 = Offset.new
   end
 
   def test_it_exists
@@ -20,7 +21,9 @@ class OffsetTest < MiniTest::Test
 
   def test_it_can_get_todays_date
 
-    assert_equal Date.today.strftime("%d%m%y"), @offset.today
+    Offset.stub_any_instance(:date, "010619") do
+      assert_equal "010619", @offset_2.date
+    end
   end
 
   def test_it_can_convert_date
