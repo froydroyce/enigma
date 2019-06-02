@@ -1,10 +1,8 @@
 class Offset
-  attr_reader :date, :key, :offset_keyset
+  attr_reader :date
 
-  def initialize(key, date = today)
-    @key = key
+  def initialize(date = today)
     @date = date
-    @offset_keyset = offset_keys
   end
 
   def today
@@ -18,8 +16,8 @@ class Offset
     end
   end
 
-  def offset_keys
-    @key.keyset.zip(convert_date).map do |key, offset_key|
+  def offset_keys(keyset)
+    keyset.zip(convert_date).map do |key, offset_key|
       key + offset_key
     end
   end
