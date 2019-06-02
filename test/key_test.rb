@@ -34,7 +34,7 @@ class KeyTest < MiniTest::Test
 
   def test_it_can_generate_keys
 
-    assert_equal [02, 27, 71, 15], @key.generate_keys
+    assert_equal [02, 27, 71, 15], @key.generate_keyset
   end
 
 end
