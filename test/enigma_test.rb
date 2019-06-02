@@ -40,7 +40,7 @@ class EnigmaTest < MiniTest::Test
 
     expected = {
       encryption: "almxhgx kse",
-      key: "02715",
+      key: "98765",
       date: "010619"
     }
 
@@ -59,7 +59,15 @@ class EnigmaTest < MiniTest::Test
     }
 
     assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
+
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "010619"
+    }
+
+    Offset.stub_any_instance(:date, "010619") do
+      assert_equal expected, @enigma.decrypt("mfhatasdwm ", "02715")
+    end
   end
-
-
 end
