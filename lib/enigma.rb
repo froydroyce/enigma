@@ -14,10 +14,10 @@ class Enigma
   end
 
   def decrypt(message, key = Key.new.numbers, date = Offset.new.date)
-    enc = Hash.new
-    enc[:decryption] = Scrambler.new(message).descramble(offset(key, date))
-    enc[:key] = key
-    enc[:date] = date
-    enc
+    dec = Hash.new
+    dec[:decryption] = Scrambler.new(message).descramble(offset(key, date))
+    dec[:key] = key
+    dec[:date] = date
+    dec
   end
 end
