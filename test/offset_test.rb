@@ -5,7 +5,7 @@ require './lib/offset'
 class OffsetTest < MiniTest::Test
   def setup
     @key = Key.new("02715")
-    @offset = Offset.new(@key, "280388")
+    @offset = Offset.new("280388")
   end
 
   def test_it_exists
@@ -16,7 +16,6 @@ class OffsetTest < MiniTest::Test
   def test_it_has_attributes
 
     assert_equal "280388", @offset.date
-    assert_equal @key, @offset.key
   end
 
   def test_it_can_get_todays_date
@@ -31,7 +30,7 @@ class OffsetTest < MiniTest::Test
 
   def test_it_can_offset_keys
 
-    assert_equal [2, 32, 75, 19], @offset.offset_keys
+    assert_equal [2, 32, 75, 19], @offset.offset_keys(@key.generate_keyset)
   end
 
 end
