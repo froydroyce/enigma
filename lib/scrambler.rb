@@ -4,5 +4,20 @@ class Scrambler
   def initialize(msg, keys)
     @msg = msg
     @keys = keys
+    @char_set = ("a".."z").to_a << " "
+  end
+
+  def zip_keys_with_letters
+    @msg.chars.each_slice(4).map do |slice|
+      slice.to_a
+    end.flat_map do |letter_group|
+      letter_group.zip(@keys)
+    end
+  end
+
+  def scramble
+    zip_keys_with_letters.map do |letter, key|
+      @char_set.rotate(@char_set.index(letter) + key).first
+    end.join
   end
 end
