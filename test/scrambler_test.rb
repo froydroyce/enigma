@@ -5,9 +5,9 @@ require './lib/scrambler'
 
 class ScramblerTest < MiniTest::Test
   def setup
-    @key = Key.new("02715")
-    @offset = Offset.new("280388")
-    @scrambler = Scrambler.new("hello world", @offset.offset_keyset)
+    @key = Key.new("02715").generate_keyset
+    @offset = Offset.new("280388").offset_keys(@key)
+    @scrambler = Scrambler.new("hello world")
   end
 
   def test_it_exists
@@ -18,23 +18,22 @@ class ScramblerTest < MiniTest::Test
   def test_it_has_attributes
 
     assert_equal "hello world", @scrambler.msg
-    assert_equal [2, 32, 75, 19], @scrambler.keys
   end
 
   def test_it_can_zip_keys_with_letters
 
-    assert_equal ["h", 2], @scrambler.zip_keys_with_letters.first
-    assert_equal ["d", 75], @scrambler.zip_keys_with_letters.last
+    assert_equal ["h", 2], @scrambler.zip_keys_with_letters(@offset).first
+    assert_equal ["d", 75], @scrambler.zip_keys_with_letters(@offset).last
   end
 
   def test_it_can_scramble
 
-    assert_equal "jjfdqeqgtqy", @scrambler.scramble
+    assert_equal "jjfdqeqgtqy", @scrambler.scramble(@offset)
   end
 
   def test_it_can_descramble
-    scrambler_1 = Scrambler.new("jjfdqeqgtqy", @offset.offset_keyset)
+    scrambler_1 = Scrambler.new("jjfdqeqgtqy")
 
-    assert_equal "hello world", scrambler_1.descramble
+    assert_equal "hello world", scrambler_1.descramble(@offset)
   end
 end

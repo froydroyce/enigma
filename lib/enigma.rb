@@ -6,10 +6,10 @@ class Enigma
   end
 
   def encrypt(message, key = Key.new.numbers, date = Offset.new.date)
-    encrypted = Hash.new
-    encrypted[:encryption] = Scrambler.new(message, offset(key, date)).scramble
-    encrypted[:key] = key
-    encrypted[:date] = date
-    encrypted
+    enc = Hash.new
+    enc[:encryption] = Scrambler.new(message).scramble(offset(key, date))
+    enc[:key] = key
+    enc[:date] = date
+    enc
   end
 end
