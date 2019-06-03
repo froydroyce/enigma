@@ -1,17 +1,12 @@
 class Offset
   attr_reader :date
 
-  def initialize(date = today)
+  def initialize(date = Date.today.strftime("%d%m%y"))
     @date = date
   end
 
-  def today
-    Date.today.strftime("%d%m%y")
-  end
-
   def convert_date
-    date_i = @date.to_i
-    (date_i * date_i).to_s.split(//).last(4).map do |number|
+    (@date.to_i**2).to_s.chars.last(4).map do |number|
       number.to_i
     end
   end
