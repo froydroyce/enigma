@@ -13,15 +13,14 @@ class Scrambler
     end
   end
 
-  def scramble(offset, msg)
+  def scramble(offset, msg, process)
     zip_keys_with_letters(offset, msg).map do |letter, key|
-      @char_set.rotate(@char_set.index(letter) + key).first
-    end.join
-  end
-
-  def descramble(offset, msg)
-    zip_keys_with_letters(offset, msg).map do |letter, key|
-      @char_set.rotate(@char_set.index(letter) + (key * -1)).first
+      next letter if !@char_set.include? letter
+      if process == "encrypt"
+        @char_set.rotate(@char_set.index(letter) + key).first
+      elsif process == "decrypt"
+        @char_set.rotate(@char_set.index(letter) + (key * -1)).first
+      end
     end.join
   end
 end
