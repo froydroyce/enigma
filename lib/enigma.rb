@@ -1,23 +1,17 @@
 class Enigma
-
-  def offset(key, date)
+  def instantiate(msg, key, date, process)
     keyset = Key.new(key).generate_keyset
-    Offset.new(date).offset_keys(keyset)
+    offset = Offset.new(date).offset_keys(keyset)
+    { scrambler: Scrambler.new.scramble(offset, msg.downcase, process) }
   end
 
   def encrypt(msg, key = Key.new.numbers, date = Offset.new.date)
-    enc = Hash.new
-    enc[:encryption] = Scrambler.new.scramble(offset(key, date), msg.downcase)
-    enc[:key] = key
-    enc[:date] = date
-    enc
+    encrypted = instantiate(msg, key, date, "encrypt")
+    { encryption: encrypted[:scrambler], key: key, date: date }
   end
 
   def decrypt(msg, key = Key.new.numbers, date = Offset.new.date)
-    dec = Hash.new
-    dec[:decryption] = Scrambler.new.descramble(offset(key, date), msg.downcase)
-    dec[:key] = key
-    dec[:date] = date
-    dec
+    decrypted = instantiate(msg, key, date, "decrypt")
+    { decryption: decrypted[:scrambler], key: key, date: date }
   end
 end
