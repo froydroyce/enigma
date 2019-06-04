@@ -10,14 +10,14 @@ class Enigma
     { encryption: encrypted[:scrambler], key: key, date: date }
   end
 
-  def decrypt(msg, key = Key.new.numbers, date = Offset.new.date)
+  def decrypt(msg, date = Offset.new.date, key = Key.new.numbers)
     decrypted = instantiate(msg, key, date, "decrypt")
     { decryption: decrypted[:scrambler], key: key, date: date }
   end
 
   def crack(msg, date = Offset.new.date)
     until msg[-4..-1] == " end"
-      cracked = decrypt(msg, key, date)
+      cracked = decrypt(msg, date)
       msg = cracked[:decryption]
     end
     cracked
