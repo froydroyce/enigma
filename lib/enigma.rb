@@ -14,4 +14,12 @@ class Enigma
     decrypted = instantiate(msg, key, date, "decrypt")
     { decryption: decrypted[:scrambler], key: key, date: date }
   end
+
+  def crack(msg, date = Offset.new.date)
+    until msg[-4..-1] == " end"
+      cracked = decrypt(msg, key, date)
+      msg = cracked[:decryption]
+    end
+    cracked
+  end
 end
