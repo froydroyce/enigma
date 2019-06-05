@@ -1,7 +1,11 @@
+require './lib/mod/generator_module'
+
 class Offset
+  include GeneratorModule
+
   attr_reader :date
 
-  def initialize(date = Date.today.strftime("%d%m%y"))
+  def initialize(date = date_ddmmyy)
     @date = date
   end
 
