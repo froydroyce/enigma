@@ -18,9 +18,8 @@ class EnigmaTest < MiniTest::Test
     msg = "Hello World"
     key = "02715"
     date = "040895"
-    expected = {:scrambler=>"keder ohulw"}
 
-    assert_equal expected, @enigma.instantiate(msg, key, date, "encrypt")
+    assert_equal "keder ohulw", @enigma.instantiate(msg, key, date, "encrypt")
   end
 
   def test_it_can_encrypt
