@@ -1,12 +1,12 @@
+require './lib/mod/generator_module'
+
 class Key
+  include GeneratorModule
+
   attr_reader :numbers
 
   def initialize(numbers = random_numbers)
     @numbers = numbers
-  end
-
-  def random_numbers
-    rand(0..99999).to_s.rjust(5, "0")
   end
 
   def generate_keyset

@@ -19,7 +19,7 @@ class OffsetTest < MiniTest::Test
     assert_equal "280388", @offset.date
   end
 
-  def test_it_can_get_todays_date
+  def test_todays_date_is_default
 
     Offset.stub_any_instance(:date, "010619") do
       assert_equal "010619", @offset_2.date

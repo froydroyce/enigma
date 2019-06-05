@@ -18,9 +18,8 @@ class EnigmaTest < MiniTest::Test
     msg = "Hello World"
     key = "02715"
     date = "040895"
-    expected = {:scrambler=>"keder ohulw"}
 
-    assert_equal expected, @enigma.instantiate(msg, key, date, "encrypt")
+    assert_equal "keder ohulw", @enigma.instantiate(msg, key, date, "encrypt")
   end
 
   def test_it_can_encrypt
@@ -78,22 +77,24 @@ class EnigmaTest < MiniTest::Test
   def test_it_can_crack
     expected = {
       decryption: "hello world end",
-      key: "19916",
+      key: "08304",
       date: "291018"
     }
 
-    Enigma.stub_any_instance(:crack, expected) do
+    Key.stub_any_instance(:numbers, "08304")  do
       assert_equal expected, @enigma.crack("vjqtbeaweqihssi", "291018")
     end
 
     expected = {
       decryption: "hello world end",
-      key: "19916",
-      date: "010619"
+      key: "08304",
+      date: "291018"
     }
 
-    Enigma.stub_any_instance(:crack, expected) do
-      assert_equal expected, @enigma.crack("vjqtbeaweqihssi")
+    Key.stub_any_instance(:numbers, "08304")  do
+      Offset.stub_any_instance(:date, "291018")  do
+        assert_equal expected, @enigma.crack("vjqtbeaweqihssi")
+      end
     end
   end
 end
